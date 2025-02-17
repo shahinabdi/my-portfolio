@@ -26,7 +26,7 @@ export type Project = {
   highlights: string[];
   technologies: string[];
   category: string;
-  links: {
+  links?: {
     github?: string;
     demo?: string;
   };

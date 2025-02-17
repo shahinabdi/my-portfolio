@@ -1,57 +1,44 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Github, Globe, ExternalLink, Star } from 'lucide-react';
+import { Github, Globe, Star } from 'lucide-react';
 import type { Project } from '../types';
 
 const projects: Project[] = [
   {
-    title: 'Astronomical Data Pipeline',
-    description: 'A high-performance data processing pipeline for handling large-scale astronomical observations from the PLATO mission.',
+    title: 'PLATO Mission Data Pipeline',
+    description: 'Data processing pipeline for ESA\'s PLATO space mission, handling astronomical observations and data validation.',
     highlights: [
-      'Processed over 100TB of astronomical data with 99.9% accuracy',
-      'Reduced processing time by 40% through optimization',
-      'Implemented parallel processing across 50+ compute nodes',
-      'Automated data validation and quality checks'
+      'Optimized Python code performance within a 30-person team, achieving 40% execution speed improvement',
+      'Implemented Docker configurations for test environments and containerization',
+      'Enhanced GitLab CI/CD pipeline reducing bugs by 30%',
+      'Created comprehensive documentation for containerized testing practices'
     ],
-    technologies: ['Python', 'NumPy', 'Pandas', 'Dask', 'Docker', 'FastAPI'],
-    category: 'Data Processing',
-    links: {
-      github: 'https://github.com/yourusername/astro-pipeline',
-      demo: 'https://demo-link.com'
-    },
+    technologies: ['Python', 'Docker', 'GitLab CI/CD', 'Git', 'Unix', 'Test Automation'],
+    category: 'Space Mission',
     featured: true
   },
   {
-    title: 'Exoplanet Detection System',
-    description: 'Machine learning-based system for detecting and classifying exoplanets from stellar light curves.',
+    title: 'Scientific Data Management Platform',
+    description: 'Django-based platform for managing and processing scientific data, serving 500+ daily users.',
     highlights: [
-      'Achieved 95% accuracy in exoplanet detection',
-      'Processed data from over 150,000 stars',
-      'Reduced false positive rate by 60%',
-      'Implemented real-time processing capabilities'
+      'Built platform with 35% improvement in data processing efficiency',
+      'Implemented React frontend reducing page load time by 60%',
+      'Developed RESTful API with 99% availability',
+      'Orchestrated multi-service Docker architecture with 10+ microservices'
     ],
-    technologies: ['Python', 'TensorFlow', 'Scikit-learn', 'Matplotlib', 'Docker'],
-    category: 'Machine Learning',
-    links: {
-      github: 'https://github.com/yourusername/exoplanet-detection'
-    },
-    featured: true
+    technologies: ['Django', 'React', 'Docker', 'PostgreSQL', 'RESTful API', 'Microservices'],
+    category: 'Web Application'
   },
   {
-    title: 'Atmospheric Data Visualization',
-    description: 'Interactive web platform for visualizing and analyzing atmospheric observation data from multiple satellites.',
+    title: 'REGARDS Data Integration',
+    description: 'ETL pipeline for migrating and validating large-scale scientific data into the REGARDS OSS platform.',
     highlights: [
-      'Built real-time data visualization dashboard',
-      'Handled streaming data from 5 different satellites',
-      'Implemented custom data filters and analytics',
-      'Reduced data loading time by 65%'
+      'Processed 100GB+ of Excel data with 99.99% accuracy in PostgreSQL migration',
+      'Reduced data errors by 75% through custom validation rules',
+      'Implemented real-time monitoring with sub-minute alert response'
     ],
-    technologies: ['React', 'D3.js', 'Node.js', 'PostgreSQL', 'Docker'],
-    category: 'Web Development',
-    links: {
-      github: 'https://github.com/yourusername/atmos-viz',
-      demo: 'https://demo-link.com'
-    }
+    technologies: ['Python', 'PostgreSQL', 'ETL', 'Excel', 'Data Validation', 'Monitoring'],
+    category: 'Data Integration'
   }
 ];
 
@@ -65,7 +52,10 @@ const ProjectCard = ({ project }: { project: Project }) => {
     >
       <div className="p-6">
         <div className="flex items-start justify-between mb-4">
-          <h3 className="text-xl font-bold text-white">{project.title}</h3>
+          <div>
+            <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+            <span className="text-sm text-blue-400">{project.category}</span>
+          </div>
           {project.featured && (
             <span className="flex items-center text-yellow-400">
               <Star size={16} className="mr-1" /> Featured
@@ -76,7 +66,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
         <p className="text-gray-400 mb-4">{project.description}</p>
 
         <div className="mb-4">
-          <h4 className="text-sm font-semibold text-blue-400 mb-2">Key Highlights:</h4>
+          <h4 className="text-sm font-semibold text-blue-400 mb-2">Key Achievements:</h4>
           <ul className="list-disc list-inside space-y-1 text-gray-400">
             {project.highlights.map((highlight, index) => (
               <li key={index} className="text-sm">{highlight}</li>
@@ -95,28 +85,30 @@ const ProjectCard = ({ project }: { project: Project }) => {
           ))}
         </div>
 
-        <div className="flex gap-4 mt-4">
-          {project.links.github && (
-            <a
-              href={project.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors"
-            >
-              <Github size={20} /> Code
-            </a>
-          )}
-          {project.links.demo && (
-            <a
-              href={project.links.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors"
-            >
-              <Globe size={20} /> Live Demo
-            </a>
-          )}
-        </div>
+        {(project.links?.github || project.links?.demo) && (
+          <div className="flex gap-4 mt-4">
+            {project.links?.github && (
+              <a
+                href={project.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors"
+              >
+                <Github size={20} /> Code
+              </a>
+            )}
+            {project.links?.demo && (
+              <a
+                href={project.links.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors"
+              >
+                <Globe size={20} /> Live Demo
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </motion.div>
   );
@@ -141,7 +133,7 @@ export default function Projects() {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white mb-4">Projects</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              A collection of my most significant projects in data processing, machine learning, and web development.
+              Showcasing my work in space missions, scientific computing, and data processing.
             </p>
           </div>
 
@@ -156,9 +148,10 @@ export default function Projects() {
               href="https://github.com/shahinabdi"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
             >
-              View More Projects <ExternalLink size={16} />
+              <Github size={20} />
+              View More Projects
             </a>
           </div>
         </motion.div>
