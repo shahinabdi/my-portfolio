@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - main # or master
   workflow_dispatch:
 
 permissions:
@@ -18,12 +18,28 @@ jobs:
         with:
           path: source-repo
 
-      - name: Checkout GitHub Pages repository
-        uses: actions/checkout@v4
-        with:
-          repository: shahinabdi/shahinabdi.github.io
-          token: ${{ secrets.DEPLOY_TOKEN }}
-          path: pages-repo
+      - name: Create and checkout pages repository
+        run: |
+          # Clone the pages repository (this might fail if repo is empty, that's ok)
+          git clone https://github.com/shahinabdi/shahinabdi.github.io.git pages-repo || mkdir pages-repo
+          cd pages-repo
+          
+          # Initialize if it's empty
+          if [ ! -d .git ]; then
+            git init
+            git remote add origin https://x-access-token:${GITHUB_TOKEN}@github.com/shahinabdi/shahinabdi.github.io.git
+          fi
+          
+          # Create and checkout main branch
+          git checkout main 2>/dev/null || git checkout -b main
+          
+          # Clean directory but keep .git
+          find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          
+          # Create .nojekyll file
+          touch .nojekyll
+        env:
+          GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -40,11 +56,6 @@ jobs:
         working-directory: source-repo
         run: npm run build
 
-      - name: Clear GitHub Pages repository
-        run: |
-          rm -rf pages-repo/*
-          touch pages-repo/.nojekyll
-
       - name: Copy build files
         run: |
           cp -r source-repo/dist/* pages-repo/
@@ -56,4 +67,4 @@ jobs:
           git config user.email "github-actions@github.com"
           git add .
           git commit -m "Deploy React application" || echo "No changes to commit"
-          git push
+          git push -u origin main -f
