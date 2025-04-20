@@ -7,7 +7,7 @@ export default function Hero() {
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
         <div className="md:w-1/3 text-center md:text-left mb-8 md:mb-0">
           <img
-            src="https://media.licdn.com/dms/image/v2/D4E03AQENtdInfN2kBA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1718622695569?e=1745452800&v=beta&t=S_dA2lCcEu1crEMOlwhYAxBliGJQp58dwyfvPgV9kcw"
+            src="/img/1742036486179.jpg"
             alt="Profile"
             className="rounded-full w-48 h-48 mx-auto md:mx-0 mb-6 object-cover border-4 border-dark-700"
           />
