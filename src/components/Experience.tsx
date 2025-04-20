@@ -4,10 +4,26 @@ import type { Experience } from '../types';
 
 const experiences: Experience[] = [
   {
+    title: 'DevOps Engineer',
+    company: 'Société Générale (SG)',
+    period: 'Mars 2025 - Present',
+    location: 'Val de Fontenay, France',
+    description: [
+    'Implementing and maintaining CI/CD pipelines using Jenkins and GitHub Actions, streamlining deployment processes for microservices architecture',
+    'Orchestrating Kubernetes clusters for production and staging environments, focusing on scalability and resource optimization',
+      'Automating infrastructure provisioning with Terraform and Ansible, reducing environment setup time and configuration drift',
+      'Collaborating with cross-functional teams to implement monitoring solutions using Prometheus and Grafana for real-time system visibility',
+      'Establishing containerization standards and best practices, facilitating the migration of legacy applications to Docker environments',
+      'Designing and implementing disaster recovery protocols and backup strategies to ensure business continuity',
+      'Integrating security scanning tools into the deployment pipeline to enforce compliance with organizational security policies'
+    ],
+    keywords: ['Jenkins', 'GitHub Actions', 'Kubernetes', 'Terraform', 'Docker', 'Python', 'Ansible', 'CI/CD', 'Infrastructure as Code', 'Prometheus', 'Grafana']
+  },
+  {
     title: 'Python Developer for PLATO Mission (ESA)',
     company: 'Institut d\'Astrophysique Spatiale (IAS)',
     period: 'July 2023 - Present',
-    location: 'Paris, France',
+    location: 'Orsay, France',
     description: [
       'Optimized Python code performance within a 30-person development team, achieving 40% execution speed improvement through code refactoring and optimization techniques',
       'Adapted existing codebase for containerization and implemented Docker configurations for test environments',
@@ -21,7 +37,7 @@ const experiences: Experience[] = [
     title: 'Scientific Data Management Platform',
     company: 'Institut d\'Astrophysique Spatiale (IAS)',
     period: 'January 2022 - June 2023',
-    location: 'Paris, France',
+    location: 'Orsay, France',
     description: [
       'Developed Django-based platform handling 500+ daily users with 35% improvement in data processing efficiency',
       'Implemented React frontend reducing page load time by 60% and RESTful API with 99% availability',
@@ -34,7 +50,7 @@ const experiences: Experience[] = [
     title: 'REGARDS Data Integration',
     company: 'Institut d\'Astrophysique Spatiale (IAS)',
     period: 'August 2021 - December 2021',
-    location: 'Paris, France',
+    location: 'Orsay, France',
     description: [
       'Built ETL pipeline processing 100GB+ of Excel data with 99.99% accuracy in PostgreSQL migration',
       'Integrated REGARDS OSS platform with custom validation rules, reducing data errors by 75%',
