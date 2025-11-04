@@ -8,7 +8,7 @@ const projects: Project[] = [
     title: 'PLATO Mission Data Pipeline',
     description: 'Data processing pipeline for ESA\'s PLATO space mission, handling astronomical observations and data validation.',
     highlights: [
-      'Optimized Python code performance within a 30-person team, achieving 40% execution speed improvement',
+      'Optimized Python code performance within a 30-person team, achieving 45% execution speed improvement',
       'Implemented Docker configurations for test environments and containerization',
       'Enhanced GitLab CI/CD pipeline reducing bugs by 30%',
       'Created comprehensive documentation for containerized testing practices'
