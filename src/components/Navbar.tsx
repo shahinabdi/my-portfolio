@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { Menu, X, Download, Terminal } from 'lucide-react';
 import { navItems, siteConfig } from '@/data/site';
 import { useActiveSection } from '@/hooks/useActiveSection';
+import { useLanguage } from '@/i18n';
 
 export function Navbar() {
+  const { language, setLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const sectionIds = navItems.map((n) => n.id);
@@ -48,7 +50,7 @@ export function Navbar() {
 
         {/* Desktop nav */}
         <ul className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => (
+          {navItems.map((item, index) => (
             <li key={item.id}>
               <a
                 href={`#${item.id}`}
@@ -62,7 +64,7 @@ export function Navbar() {
                 <span className="font-mono text-xs text-accent-500/70 group-hover:text-accent-500">
                   {item.number}
                 </span>
-                <span className="font-medium">{item.label}</span>
+                <span className="font-medium">{t.nav[index]}</span>
                 {activeSection === item.id && (
                   <span className="h-1 w-1 rounded-full bg-accent-500" />
                 )}
@@ -73,6 +75,14 @@ export function Navbar() {
 
         {/* Desktop CTA */}
         <div className="hidden items-center gap-3 md:flex">
+          <button
+            type="button"
+            onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
+            aria-label={`${t.languageLabel}: ${t.switchTo}`}
+            className="rounded-md border border-ink-300 px-3 py-2 font-mono text-xs font-medium text-ink-600 transition-colors hover:border-ink-900 hover:text-ink-900"
+          >
+            {language === 'fr' ? 'EN' : 'FR'}
+          </button>
           <a
             href={siteConfig.cvUrl}
             download
@@ -88,7 +98,7 @@ export function Navbar() {
           type="button"
           onClick={() => setMobileOpen((v) => !v)}
           className="flex items-center justify-center rounded-md p-2 text-ink-700 md:hidden"
-          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          aria-label={mobileOpen ? t.closeMenu : t.openMenu}
           aria-expanded={mobileOpen}
         >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -99,7 +109,17 @@ export function Navbar() {
       {mobileOpen && (
         <div className="border-t border-ink-200 bg-ink-50 md:hidden">
           <ul className="space-y-1 px-6 py-4">
-            {navItems.map((item) => (
+            <li>
+              <button
+                type="button"
+                onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
+                className="flex w-full items-center justify-between rounded-md px-3 py-3 text-left font-mono text-sm text-ink-500 hover:bg-ink-100 hover:text-ink-800"
+              >
+                <span>{t.languageLabel}</span>
+                <span className="font-semibold text-accent-600">{language === 'fr' ? 'EN' : 'FR'}</span>
+              </button>
+            </li>
+            {navItems.map((item, index) => (
               <li key={item.id}>
                 <a
                   href={`#${item.id}`}
@@ -111,7 +131,7 @@ export function Navbar() {
                   }`}
                 >
                   <span className="font-mono text-xs text-accent-500">{item.number}</span>
-                  {item.label}
+                  {t.nav[index]}
                 </a>
               </li>
             ))}
@@ -123,7 +143,7 @@ export function Navbar() {
                 className="mt-2 flex items-center gap-2 rounded-md border border-ink-300 px-3 py-3 text-base font-medium text-ink-700"
               >
                 <Download className="h-4 w-4" />
-                Download CV
+                {t.cv}
               </a>
             </li>
           </ul>

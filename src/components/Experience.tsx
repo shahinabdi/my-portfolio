@@ -1,6 +1,7 @@
 import { experiences, type Experience } from '@/data/experiences';
+import { localizedExperience, useLanguage } from '@/i18n';
 
-function ExperienceItem({ exp, index }: { exp: Experience; index: number }) {
+function ExperienceItem({ exp, index, content, role, currentLabel }: { exp: Experience; index: number; content: typeof localizedExperience.en[number]; role: string; currentLabel: string }) {
   return (
     <article className="reveal relative pl-8 lg:pl-12">
       {/* Timeline dot */}
@@ -28,20 +29,20 @@ function ExperienceItem({ exp, index }: { exp: Experience; index: number }) {
           {exp.period}
         </span>
       </div>
-      <p className="mt-0.5 font-mono text-sm text-ink-500">{exp.role}</p>
+      <p className="mt-0.5 font-mono text-sm text-ink-500">{role}</p>
 
       {/* Current badge */}
       {exp.current && (
         <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-accent-50 px-2.5 py-0.5 font-mono text-xs text-accent-700">
           <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
-          Current
+          {currentLabel}
         </span>
       )}
 
       {/* Metrics */}
       {exp.metrics && exp.metrics.length > 0 && (
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {exp.metrics.map((metric) => (
+          {content.metrics.map((metric) => (
             <div
               key={metric.label}
               className="rounded-lg border border-ink-200 bg-white px-4 py-3"
@@ -60,7 +61,7 @@ function ExperienceItem({ exp, index }: { exp: Experience; index: number }) {
 
       {/* Achievements */}
       <ul className="mt-5 space-y-2.5">
-        {exp.achievements.map((achievement, i) => (
+        {content.achievements.map((achievement, i) => (
           <li key={i} className="flex gap-3 text-sm leading-relaxed text-ink-600">
             <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-ink-300" />
             <span>{achievement}</span>
@@ -89,6 +90,7 @@ function ExperienceItem({ exp, index }: { exp: Experience; index: number }) {
 }
 
 export function Experience() {
+  const { language, t } = useLanguage();
   return (
     <section id="experience" className="py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -96,7 +98,7 @@ export function Experience() {
         <div className="reveal mb-12 flex items-baseline gap-4">
           <span className="section-number">02</span>
           <h2 className="text-2xl font-bold tracking-tight text-ink-900 lg:text-3xl">
-            Experience
+            {t.sections[1]}
           </h2>
           <div className="divider ml-4 flex-1" />
         </div>
@@ -107,7 +109,7 @@ export function Experience() {
           <div className="absolute left-1.5 top-0 bottom-0 w-px bg-ink-200" />
           <div className="space-y-0">
             {experiences.map((exp, index) => (
-              <ExperienceItem key={`${exp.company}-${index}`} exp={exp} index={index} />
+              <ExperienceItem key={`${exp.company}-${index}`} exp={exp} index={index} content={localizedExperience[language][index]} role={t.experienceRoles[index]} currentLabel={t.current} />
             ))}
           </div>
         </div>

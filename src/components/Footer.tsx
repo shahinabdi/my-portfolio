@@ -1,7 +1,9 @@
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { siteConfig } from '@/data/site';
+import { useLanguage } from '@/i18n';
 
 export function Footer() {
+  const { t } = useLanguage();
   return (
     <footer className="border-t border-ink-200 py-10">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -10,7 +12,7 @@ export function Footer() {
           <div>
             <p className="font-mono text-sm font-semibold text-ink-900">SHAHIN ABDI</p>
             <p className="mt-0.5 font-mono text-xs text-ink-400">
-              DevOps Engineer / Python Developer
+              {t.footerRole}
             </p>
           </div>
 

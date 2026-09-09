@@ -1,7 +1,9 @@
 import { Mail, MapPin, Linkedin, Globe, ArrowRight } from 'lucide-react';
 import { siteConfig } from '@/data/site';
+import { useLanguage } from '@/i18n';
 
 export function Contact() {
+  const { t } = useLanguage();
   return (
     <section id="contact" className="py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -9,18 +11,17 @@ export function Contact() {
         <div className="reveal mb-12 flex items-baseline gap-4">
           <span className="section-number">06</span>
           <h2 className="text-2xl font-bold tracking-tight text-ink-900 lg:text-3xl">
-            Contact
+            {t.sections[5]}
           </h2>
           <div className="divider ml-4 flex-1" />
         </div>
 
         <div className="reveal">
           <p className="text-3xl font-bold tracking-tight text-ink-900 lg:text-5xl">
-            Let's build reliable systems.
+            {t.contactLead}
           </p>
           <p className="mt-4 max-w-prose text-base leading-relaxed text-ink-500">
-            Open to DevOps and Python engineering roles. Reach out through any of the
-            channels below.
+            {t.contactBody}
           </p>
 
           {/* Contact details */}
@@ -40,7 +41,7 @@ export function Contact() {
             <div className="flex items-center gap-4 bg-white p-5">
               <MapPin className="h-5 w-5 text-accent-500" />
               <div>
-                <p className="font-mono text-xs text-ink-400">Location</p>
+                <p className="font-mono text-xs text-ink-400">{t.location}</p>
                 <p className="text-sm font-medium text-ink-900">{siteConfig.location}</p>
               </div>
             </div>
@@ -80,7 +81,7 @@ export function Contact() {
             className="mt-8 inline-flex items-center gap-2 rounded-md bg-ink-900 px-6 py-3 text-sm font-medium text-ink-50 transition-all hover:bg-ink-800 hover:shadow-lg"
           >
             <Mail className="h-4 w-4" />
-            Get in touch
+            {t.getInTouch}
           </a>
         </div>
       </div>
