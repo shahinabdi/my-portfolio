@@ -66,4 +66,16 @@ jobs:
           git add .
           git commit -m "Deploy React application" || echo "No changes to commit"
           git remote set-url origin https://${{ secrets.DEPLOY_TOKEN }}@github.com/shahinabdi/shahinabdi.github.io.git
-          git push -u origin main -f
+
+          # Retry push in case of a concurrent update to the remote main ref
+          for i in 1 2 3 4 5; do
+            if git push -u origin main -f; then
+              exit 0
+            fi
+            echo "Push rejected (attempt $i), retrying..."
+            sleep $((RANDOM % 5 + 1))
+            git fetch origin main
+          done
+
+          echo "Push failed after multiple attempts"
+          exit 1
