@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: 'Shahin Abdi',
+  name: 'Shahin ABDI',
   role: 'DevOps Engineer / Python Developer',
   tagline: 'Building, modernizing and operating reliable Python platforms.',
   description:

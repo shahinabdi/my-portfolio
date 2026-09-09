@@ -20,7 +20,7 @@ export function Hero() {
 
         {/* Name */}
         <h1 className="text-5xl font-bold tracking-tighter text-ink-900 sm:text-6xl lg:text-7xl">
-          Shahin Abdi
+          Shahin ABDI
         </h1>
 
         {/* Roles */}

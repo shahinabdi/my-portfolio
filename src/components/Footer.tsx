@@ -10,7 +10,7 @@ export function Footer() {
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
           {/* Identity */}
           <div>
-            <p className="font-mono text-sm font-semibold text-ink-900">SHAHIN ABDI</p>
+            <p className="font-mono text-sm font-semibold text-ink-900">Shahin ABDI</p>
             <p className="mt-0.5 font-mono text-xs text-ink-400">
               {t.footerRole}
             </p>
