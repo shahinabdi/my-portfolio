@@ -11,7 +11,7 @@ export const siteConfig = {
     linkedin: 'https://www.linkedin.com/in/shahinabdi',
     portfolio: 'https://shahinabdi.github.io/',
   },
-  cvUrl: '/cv.txt',
+  cvUrl: '/Shahin_ABDI_CV_site.pdf',
 };
 
 export const navItems = [
