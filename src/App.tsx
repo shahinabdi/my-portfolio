@@ -1,44 +1,31 @@
-import { useEffect } from 'react';
-import Hero from './components/Hero';
-import Experience from './components/Experience';
-import Education from './components/Education';
-import Projects from './components/Projects';
-import Publications from './components/Publications';
-import Contact from './components/Contact';
+import { Navbar } from '@/components/Navbar';
+import { Hero } from '@/components/Hero';
+import { About } from '@/components/About';
+import { Experience } from '@/components/Experience';
+import { Expertise } from '@/components/Expertise';
+import { Projects } from '@/components/Projects';
+import { Education } from '@/components/Education';
+import { Contact } from '@/components/Contact';
+import { Footer } from '@/components/Footer';
+import { useReveal } from '@/hooks/useReveal';
 
 function App() {
-  useEffect(() => {
-    const handleScroll = (e: Event) => {
-      e.preventDefault();
-      const target = (e.target as HTMLAnchorElement).getAttribute('href');
-      if (target && target.startsWith('#')) {
-        const element = document.querySelector(target);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    };
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', handleScroll);
-    });
-
-    return () => {
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.removeEventListener('click', handleScroll);
-      });
-    };
-  }, []);
+  useReveal();
 
   return (
-    <main className="min-h-screen bg-dark-950 text-gray-100">
-      <Hero />
-      <Experience />
-      <Education />
-      <Projects />
-      <Publications />
-      <Contact />
-    </main>
+    <div className="min-h-screen bg-ink-50">
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Experience />
+        <Expertise />
+        <Projects />
+        <Education />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
   );
 }
 

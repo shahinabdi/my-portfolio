@@ -1,61 +1,88 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { Github, Linkedin, Mail } from 'lucide-react';
-import type { SocialLink } from '../types';
+import { Mail, MapPin, Linkedin, Globe, ArrowRight } from 'lucide-react';
+import { siteConfig } from '@/data/site';
 
-const socialLinks: SocialLink[] = [
-  {
-    platform: 'GitHub',
-    url: 'https://github.com/shahinabdi',
-    icon: Github,
-  },
-  {
-    platform: 'LinkedIn',
-    url: 'https://linkedin.com/in/shahinabdi',
-    icon: Linkedin,
-  },
-  {
-    platform: 'Email',
-    url: 'mailto:contact@shahinabdi.fr',
-    icon: Mail,
-  },
-];
-
-export default function Contact() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
+export function Contact() {
   return (
-    <section id="contact" className="py-20 bg-dark-900">
-      <div className="container mx-auto px-4">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto text-center"
-        >
-          <h2 className="text-5xl md:text-6xl font-bold mb-12 text-white">
-            Get in Touch
+    <section id="contact" className="py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        {/* Section header */}
+        <div className="reveal mb-12 flex items-baseline gap-4">
+          <span className="section-number">06</span>
+          <h2 className="text-2xl font-bold tracking-tight text-ink-900 lg:text-3xl">
+            Contact
           </h2>
-          
-          <div className="flex justify-center gap-12">
-            {socialLinks.map(({ platform, url, icon: Icon }) => (
-              <a
-                key={platform}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-400 transition-colors duration-300"
-                aria-label={platform}
-              >
-                <Icon size={48} />
-              </a>
-            ))}
+          <div className="divider ml-4 flex-1" />
+        </div>
+
+        <div className="reveal">
+          <p className="text-3xl font-bold tracking-tight text-ink-900 lg:text-5xl">
+            Let's build reliable systems.
+          </p>
+          <p className="mt-4 max-w-prose text-base leading-relaxed text-ink-500">
+            Open to DevOps and Python engineering roles. Reach out through any of the
+            channels below.
+          </p>
+
+          {/* Contact details */}
+          <div className="mt-10 grid gap-px overflow-hidden rounded-xl border border-ink-200 bg-ink-200 sm:grid-cols-2">
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="group flex items-center gap-4 bg-white p-5 transition-colors hover:bg-ink-50"
+            >
+              <Mail className="h-5 w-5 text-accent-500" />
+              <div>
+                <p className="font-mono text-xs text-ink-400">Email</p>
+                <p className="text-sm font-medium text-ink-900">{siteConfig.email}</p>
+              </div>
+              <ArrowRight className="ml-auto h-4 w-4 text-ink-300 transition-transform group-hover:translate-x-1 group-hover:text-ink-600" />
+            </a>
+
+            <div className="flex items-center gap-4 bg-white p-5">
+              <MapPin className="h-5 w-5 text-accent-500" />
+              <div>
+                <p className="font-mono text-xs text-ink-400">Location</p>
+                <p className="text-sm font-medium text-ink-900">{siteConfig.location}</p>
+              </div>
+            </div>
+
+            <a
+              href={siteConfig.links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-4 bg-white p-5 transition-colors hover:bg-ink-50"
+            >
+              <Linkedin className="h-5 w-5 text-accent-500" />
+              <div>
+                <p className="font-mono text-xs text-ink-400">LinkedIn</p>
+                <p className="text-sm font-medium text-ink-900">/in/shahinabdi</p>
+              </div>
+              <ArrowRight className="ml-auto h-4 w-4 text-ink-300 transition-transform group-hover:translate-x-1 group-hover:text-ink-600" />
+            </a>
+
+            <a
+              href={siteConfig.links.portfolio}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-4 bg-white p-5 transition-colors hover:bg-ink-50"
+            >
+              <Globe className="h-5 w-5 text-accent-500" />
+              <div>
+                <p className="font-mono text-xs text-ink-400">Portfolio</p>
+                <p className="text-sm font-medium text-ink-900">shahinabdi.github.io</p>
+              </div>
+              <ArrowRight className="ml-auto h-4 w-4 text-ink-300 transition-transform group-hover:translate-x-1 group-hover:text-ink-600" />
+            </a>
           </div>
-        </motion.div>
+
+          {/* Primary CTA */}
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="mt-8 inline-flex items-center gap-2 rounded-md bg-ink-900 px-6 py-3 text-sm font-medium text-ink-50 transition-all hover:bg-ink-800 hover:shadow-lg"
+          >
+            <Mail className="h-4 w-4" />
+            Get in touch
+          </a>
+        </div>
       </div>
     </section>
   );

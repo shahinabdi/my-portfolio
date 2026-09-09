@@ -1,63 +1,93 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import type { Skill } from '../types';
+import { siteConfig } from '@/data/site';
 
-const skills: Skill[] = [
-  { name: 'Frontend Development', percentage: 90 },
-  { name: 'Backend Development', percentage: 85 },
-  { name: 'UI/UX Design', percentage: 75 },
-  { name: 'DevOps', percentage: 70 },
+const profileStats = [
+  { value: '6+', label: 'Years' },
+  { value: 'Python', label: 'Platform' },
+  { value: 'DevOps', label: 'CI/CD' },
+  { value: 'Production', label: 'Engineering' },
+  { value: 'Scientific', label: 'Computing' },
 ];
 
-export default function About() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+const aboutPoints = [
+  'Production environments',
+  'Monitoring & incident management',
+  'On-call',
+  'Python platform modernization',
+  'CI/CD pipeline engineering',
+  'Kubernetes orchestration',
+  'Docker containerization',
+  'Infrastructure automation',
+  'Data Science & scientific computing',
+  'Astrophysics background',
+];
 
+export function About() {
   return (
-    <section id="about" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
-        >
-          <h2 className="text-4xl font-bold text-center mb-12">About Me</h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <p className="text-lg text-gray-600 mb-6">
-                I'm a passionate Full Stack Developer with over 5 years of experience
-                building web applications. I specialize in React, Node.js, and cloud
-                technologies, focusing on creating scalable and user-friendly solutions.
-              </p>
-              <p className="text-lg text-gray-600">
-                When I'm not coding, you can find me contributing to open-source
-                projects, writing technical blog posts, or exploring new technologies.
-              </p>
-            </div>
-            <div>
-              {skills.map((skill, index) => (
-                <div key={skill.name} className="mb-6">
-                  <div className="flex justify-between mb-2">
-                    <span className="font-medium">{skill.name}</span>
-                    <span>{skill.percentage}%</span>
-                  </div>
-                  <div className="h-2 bg-gray-200 rounded-full">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={inView ? { width: `${skill.percentage}%` } : {}}
-                      transition={{ duration: 1, delay: index * 0.2 }}
-                      className="h-full bg-blue-600 rounded-full"
-                    />
-                  </div>
-                </div>
+    <section id="about" className="py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        {/* Section header */}
+        <div className="reveal mb-12 flex items-baseline gap-4">
+          <span className="section-number">01</span>
+          <h2 className="text-2xl font-bold tracking-tight text-ink-900 lg:text-3xl">About</h2>
+          <div className="divider ml-4 flex-1" />
+        </div>
+
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          {/* Professional story */}
+          <div className="reveal lg:col-span-7">
+            <p className="text-lg leading-relaxed text-ink-700">
+              Ingénieur DevOps / Développeur Python avec 6+ ans d'expérience en développement
+              Python, DevOps, CI/CD et applications scientifiques.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-ink-500">
+              I work across the full lifecycle of Python platforms — from modernizing legacy
+              codebases and migrating language versions to building CI/CD pipelines and
+              operating production environments. My background in astrophysics and scientific
+              computing gives me a unique perspective on performance, data integrity, and
+              computational workloads.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
+              {aboutPoints.map((point) => (
+                <span
+                  key={point}
+                  className="flex items-center gap-2 font-mono text-xs text-ink-500"
+                >
+                  <span className="h-1 w-1 rounded-full bg-accent-500" />
+                  {point}
+                </span>
               ))}
             </div>
           </div>
-        </motion.div>
+
+          {/* Engineering profile summary */}
+          <div className="reveal lg:col-span-5">
+            <div className="rounded-xl border border-ink-200 bg-white p-6 lg:p-8">
+              <div className="mb-6 flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-green-500" />
+                <span className="font-mono text-xs uppercase tracking-widest text-ink-400">
+                  Engineering Profile
+                </span>
+              </div>
+              <dl className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-2">
+                {profileStats.map((stat) => (
+                  <div key={stat.label} className="border-l-2 border-ink-200 pl-4">
+                    <dt className="font-mono text-xs text-ink-400">{stat.label}</dt>
+                    <dd className="mt-1 text-xl font-bold tracking-tight text-ink-900">
+                      {stat.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="mt-6 border-t border-ink-100 pt-4">
+                <p className="font-mono text-xs text-ink-400">
+                  <span className="text-ink-600">{siteConfig.location}</span> · Available for
+                  engineering roles
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

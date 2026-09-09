@@ -1,145 +1,116 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import type { Experience } from '../types';
+import { experiences, type Experience } from '@/data/experiences';
 
-const experiences: Experience[] = [
-{
-  title: 'DevOps Engineer',
-  company: 'Société Générale (SG)',
-  period: 'March 2025 - Present',
-  location: 'Val de Fontenay, France',
-  description: [
-    'Built and maintained CI/CD pipelines using Jenkins and GitHub Actions, reducing deployment time and improving release reliability across multiple microservices',
-    'Managed Kubernetes clusters for production and staging, optimizing resource usage and ensuring high availability for critical banking applications',
-    'Automated infrastructure provisioning with Terraform and Ansible, reducing environment setup time and eliminating configuration drift',
-    'Implemented monitoring and observability solutions using Prometheus and Grafana, enabling real-time system visibility and faster incident response',
-    'Established containerization standards and best practices, facilitating the migration of legacy applications to Docker-based environments',
-    'Designed and implemented disaster recovery protocols and backup strategies to ensure business continuity for critical systems',
-    'Integrated security scanning tools into CI/CD pipelines to enforce compliance with organizational security and regulatory policies'
-  ],
-  keywords: [
-    'Jenkins',
-    'GitHub Actions',
-    'Kubernetes',
-    'Terraform',
-    'Docker',
-    'Python',
-    'Ansible',
-    'CI/CD',
-    'Infrastructure as Code',
-    'Prometheus',
-    'Grafana'
-  ]
-},
-  {
-    title: 'Python Developer for PLATO Mission (ESA)',
-    company: 'Institut d\'Astrophysique Spatiale (IAS)',
-    period: 'July 2023 - Present',
-    location: 'Orsay, France',
-    description: [
-      'Optimized Python code performance within a 30-person development team, achieving 40% execution speed improvement through code refactoring and optimization techniques',
-      'Adapted existing codebase for containerization and implemented Docker configurations for test environments',
-      'Enhanced GitLab CI/CD pipeline with automated test suites, contributing to 30% overall bug reduction in team deliverables',
-      'Collaborated with 6 core developers, focusing on code optimization, test automation, and Docker implementation',
-      'Created documentation and examples for containerized testing practices adopted by the development team'
-    ],
-    keywords: ['Python', 'Docker', 'GitLab CI/CD', 'Test Automation', 'Code Optimization', 'Documentation']
-  },
-  {
-    title: 'Scientific Data Management Platform',
-    company: 'Institut d\'Astrophysique Spatiale (IAS)',
-    period: 'January 2022 - June 2023',
-    location: 'Orsay, France',
-    description: [
-      'Developed Django-based platform handling 500+ daily users with 35% improvement in data processing efficiency',
-      'Implemented React frontend reducing page load time by 60% and RESTful API with 99% availability',
-      'Orchestrated multi-service Docker architecture managing 10+ microservices with automated scaling',
-      'Established coding standards and review processes, reducing technical debt by 40%'
-    ],
-    keywords: ['Django', 'React', 'Docker', 'RESTful API', 'Microservices', 'Code Standards']
-  },
-  {
-    title: 'REGARDS Data Integration',
-    company: 'Institut d\'Astrophysique Spatiale (IAS)',
-    period: 'August 2021 - December 2021',
-    location: 'Orsay, France',
-    description: [
-      'Built ETL pipeline processing 100GB+ of Excel data with 99.99% accuracy in PostgreSQL migration',
-      'Integrated REGARDS OSS platform with custom validation rules, reducing data errors by 75%',
-      'Implemented real-time monitoring system with sub-minute alert response for critical issues'
-    ],
-    keywords: ['ETL', 'PostgreSQL', 'Data Migration', 'Monitoring', 'REGARDS OSS']
-  },
-  {
-    title: 'Python / Fortran Developer',
-    company: 'LATMOS',
-    period: 'March 2020 - August 2021',
-    location: 'Paris, France',
-    description: [
-      'Optimized Python codebase for atmospheric calculations, achieving 45% faster computation cycles',
-      'Designed MongoDB/R-based pipeline processing 5TB+ of atmospheric data with 99.9% accuracy',
-      'Successfully simulated 111K+ terrestrial spectra with distributed computing across 50+ nodes'
-    ],
-    keywords: ['Python', 'Fortran', 'MongoDB', 'R', 'Distributed Computing', 'Data Processing']
-  }
-];
-
-export default function Experience() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
+function ExperienceItem({ exp, index }: { exp: Experience; index: number }) {
   return (
-    <section id="experience" className="py-20 bg-dark-800">
-      <div className="container mx-auto px-4">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
+    <article className="reveal relative pl-8 lg:pl-12">
+      {/* Timeline dot */}
+      <div className="absolute left-0 top-1.5 flex items-center">
+        <span
+          className={`h-3 w-3 rounded-full border-2 ${
+            exp.current
+              ? 'border-accent-500 bg-accent-500'
+              : 'border-ink-300 bg-ink-50'
+          }`}
+        />
+        {exp.current && (
+          <span className="absolute h-3 w-3 animate-ping rounded-full border-2 border-accent-500 opacity-40" />
+        )}
+      </div>
+
+      {/* Header */}
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+        <h3 className="text-lg font-semibold text-ink-900">{exp.company}</h3>
+        <span
+          className={`font-mono text-xs ${
+            exp.current ? 'text-accent-600' : 'text-ink-400'
+          }`}
         >
-          <h2 className="text-4xl font-bold text-center mb-12 text-white">Professional Experience</h2>
-          <div className="space-y-12">
-            {experiences.map((experience, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative pl-8 before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-px before:bg-dark-600"
-              >
-                <div className="absolute left-0 top-0 w-2 h-2 bg-blue-500 rounded-full transform -translate-x-1/2"></div>
-                <div className="bg-dark-900 rounded-lg p-6 border border-dark-700">
-                  <h3 className="text-xl font-semibold text-white mb-2">{experience.title}</h3>
-                  <p className="text-blue-400 mb-1">{experience.company}</p>
-                  <p className="text-gray-400 mb-1">{experience.period}</p>
-                  {experience.location && (
-                    <p className="text-gray-500 mb-4">{experience.location}</p>
-                  )}
-                  
-                  <ul className="list-disc list-inside space-y-2 text-gray-300 mb-4">
-                    {experience.description.map((desc, i) => (
-                      <li key={i} className="pl-2">{desc}</li>
-                    ))}
-                  </ul>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    {experience.keywords.map((keyword, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1 bg-dark-700 text-blue-400 text-sm rounded-full"
-                      >
-                        {keyword}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
+          {exp.period}
+        </span>
+      </div>
+      <p className="mt-0.5 font-mono text-sm text-ink-500">{exp.role}</p>
+
+      {/* Current badge */}
+      {exp.current && (
+        <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-accent-50 px-2.5 py-0.5 font-mono text-xs text-accent-700">
+          <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
+          Current
+        </span>
+      )}
+
+      {/* Metrics */}
+      {exp.metrics && exp.metrics.length > 0 && (
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {exp.metrics.map((metric) => (
+            <div
+              key={metric.label}
+              className="rounded-lg border border-ink-200 bg-white px-4 py-3"
+            >
+              <p className="font-mono text-xs text-ink-400">{metric.label}</p>
+              <p className="mt-1 text-2xl font-bold tracking-tight text-ink-900">
+                {metric.value}
+              </p>
+              {metric.sub && (
+                <p className="mt-0.5 font-mono text-xs text-ink-400">{metric.sub}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Achievements */}
+      <ul className="mt-5 space-y-2.5">
+        {exp.achievements.map((achievement, i) => (
+          <li key={i} className="flex gap-3 text-sm leading-relaxed text-ink-600">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-ink-300" />
+            <span>{achievement}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* Technologies */}
+      <div className="mt-5 flex flex-wrap gap-1.5">
+        {exp.technologies.map((tech) => (
+          <span
+            key={tech}
+            className="rounded border border-ink-200 bg-ink-50 px-2 py-0.5 font-mono text-xs text-ink-500"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      {/* Divider between items (not after last) */}
+      {index < experiences.length - 1 && (
+        <div className="mt-10 mb-10 ml-0 h-px w-px bg-ink-200" />
+      )}
+    </article>
+  );
+}
+
+export function Experience() {
+  return (
+    <section id="experience" className="py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        {/* Section header */}
+        <div className="reveal mb-12 flex items-baseline gap-4">
+          <span className="section-number">02</span>
+          <h2 className="text-2xl font-bold tracking-tight text-ink-900 lg:text-3xl">
+            Experience
+          </h2>
+          <div className="divider ml-4 flex-1" />
+        </div>
+
+        {/* Timeline */}
+        <div className="relative">
+          {/* Vertical line */}
+          <div className="absolute left-1.5 top-0 bottom-0 w-px bg-ink-200" />
+          <div className="space-y-0">
+            {experiences.map((exp, index) => (
+              <ExperienceItem key={`${exp.company}-${index}`} exp={exp} index={index} />
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
