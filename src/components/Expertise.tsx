@@ -1,4 +1,4 @@
-import { expertiseAreas, technologyStack } from '@/data/expertise';
+import { expertiseAreas, skillCategories } from '@/data/expertise';
 import { Terminal } from 'lucide-react';
 import { localizedExpertise, useLanguage } from '@/i18n';
 
@@ -40,14 +40,21 @@ export function Expertise() {
             </span>
             <div className="h-px flex-1 bg-ink-200" />
           </div>
-          <div className="flex flex-wrap gap-2">
-            {technologyStack.map((tech) => (
-              <span
-                key={tech}
-                className="rounded-md border border-ink-200 bg-ink-50 px-3 py-1.5 font-mono text-xs text-ink-600 transition-colors hover:border-ink-400 hover:text-ink-900"
-              >
-                {tech}
-              </span>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {skillCategories.map((category) => (
+              <div key={category.title.en} className="rounded-lg border border-ink-200 bg-white p-5">
+                <h3 className="text-sm font-semibold text-ink-800">{category.title[language]}</h3>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {category.skills[language].map((skill) => (
+                    <span
+                      key={skill}
+                      className="rounded-md border border-ink-200 bg-ink-50 px-2.5 py-1 font-mono text-xs text-ink-600"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>

@@ -29,7 +29,7 @@ const translations = {
     contribution: 'Contribution',
     technologyStack: 'Stack technique',
     linuxDescription:
-      "Expérience approfondie des environnements Linux : outils de développement, personnalisation du système et workflows développeur. Pas administrateur système, mais un ingénieur à l'aise au niveau du système.",
+      'Administration, maintenance et optimisation des environnements Linux.',
     linuxAreas: ['Environnement de développement Linux', 'Outils', 'Personnalisation du système', 'Workflows développeur', 'RHEL'],
     astrophysicsNote:
       "Le parcours en astrophysique est un vrai différenciateur : il apporte une solide expérience du calcul scientifique, du traitement de données à grande échelle et du code soumis à de fortes contraintes de performance.",
@@ -71,7 +71,7 @@ const translations = {
     contribution: 'Contribution',
     technologyStack: 'Technology stack',
     linuxDescription:
-      'Deep experience working in Linux environments: development tooling, system customization and developer workflows. Not a system administrator, but an engineer comfortable operating at the system level.',
+      'Linux environment administration, maintenance and optimization.',
     linuxAreas: ['Linux development environment', 'Tooling', 'System customization', 'Developer workflows', 'RHEL'],
     astrophysicsNote:
       'The astrophysics background is a differentiator, bringing deep experience with scientific computing, large-scale data processing and performance-critical code.',
@@ -93,16 +93,112 @@ export type Translation = (typeof translations)[Language];
 
 export const localizedExperience = {
   fr: [
-    { achievements: ['Migration de la plateforme Python de Python 3.8 vers Python 3.12, réduisant les incidents de production denviron 40 % et améliorant la lisibilité des erreurs.', 'Migration des pipelines CI/CD de Jenkins vers GitHub Actions, avec amélioration de leur qualité, fiabilité, maintenabilité et sécurité.', "Modernisation d'une base de code développée depuis environ 5 ans : gestion de l'obsolescence technique, refactoring et amélioration de la qualité du code.", 'Introduction de uv comme gestionnaire de paquets et denvironnements Python, réduisant le temps de création des images de 8 à 3 minutes (-62,5 %) et standardisant la gestion des dépendances.', 'Adoption de Ruff pour automatiser le linting et le formatage, renforçant les standards de qualité Python.', 'Amélioration de la stratégie de gestion des secrets et renforcement des pratiques de sécurité dans les workflows CI/CD.', 'Gestion et supervision des environnements de production et de staging, avec monitoring de la production et suivi de la disponibilité des services.', 'Participation aux astreintes et gestion des incidents de production, avec analyse et résolution des problèmes afin dassurer la continuité de service.', 'Provisionnement avec Ansible et Terraform dun environnement UAT supplémentaire pour la documentation, les tests de nouveaux environnements et la mesure du temps de reprise (DR).', 'Orchestration de clusters Kubernetes pour les environnements de production et de staging.', 'Exploitation et intégration de RabbitMQ dans un environnement de microservices et contribution au diagnostic des échanges asynchrones.'], metrics: [{ label: 'Python 3.8 → 3.12', value: '-40%', sub: 'incidents de production' }, { label: '8 min → 3 min', value: '-62,5%', sub: 'temps de création des images' }] },
-    { achievements: ['Optimisation du code Python pour la mission PLATO de lESA, améliorant les performances de 40 %.', 'Mise en place de tests unitaires et dintégration rigoureux, réduisant les bugs de 30 %.', "Intégration du code optimisé dans le pipeline de traitement des données, accélérant l'analyse de 25 %."], metrics: [{ label: 'Performance', value: '+40%', sub: 'optimisation du code' }, { label: 'Taux de bugs', value: '-30%', sub: 'grâce aux tests' }, { label: "Vitesse d'analyse", value: '+25%', sub: 'pipeline de données' }] },
-    { achievements: ["Développement d'une plateforme de gestion de bases de données avec Django, améliorant l'efficacité du traitement des données de 35 %.", 'Création dune interface utilisateur intégrée au backend.', 'Conteneurisation du projet avec Docker et Docker Compose.'], metrics: [{ label: 'Traitement des données', value: '+35%', sub: 'efficacité' }] },
-    { achievements: ['Optimisation de programmes Python pour des calculs atmosphériques complexes, réduisant le temps de calcul de 45 %.', 'Gestion et analyse de vastes ensembles de données atmosphériques avec MongoDB et R.', 'Réalisation de simulations de spectres terrestres sur 111 766 spectres.'], metrics: [{ label: 'Temps de calcul', value: '-45%', sub: 'calculs atmosphériques' }, { label: 'Spectres simulés', value: '111 766', sub: 'spectres terrestres' }] },
+    {
+      achievements: [
+        'Migration de la plateforme Python 3.8 vers Python 3.12, réduisant les incidents de production d’environ 40 % et améliorant la lisibilité des erreurs.',
+        'Migration des pipelines CI/CD de Jenkins vers GitHub Actions, avec amélioration de leur qualité, fiabilité, maintenabilité et sécurité.',
+        'Modernisation d’une base de code développée depuis environ 5 ans : gestion de l’obsolescence technique, refactoring et amélioration de la qualité du code.',
+        'Introduction de uv comme gestionnaire de paquets et d’environnements Python, réduisant le temps de création des images de 8 à 3 minutes (-62,5 %) et standardisant la gestion des dépendances.',
+        'Adoption de Ruff pour automatiser le linting et le formatage, renforçant les standards de qualité Python.',
+        'Amélioration de la stratégie de gestion des secrets et renforcement des pratiques de sécurité dans les workflows CI/CD.',
+        'Supervision en temps réel des environnements de production et de staging, avec suivi de la disponibilité, des performances et de la santé du produit afin de garantir sa haute disponibilité.',
+        'Participation aux rotations d’astreinte et gestion des incidents de production : détection, diagnostic, résolution et suivi afin d’assurer la continuité de service et la disponibilité du produit.',
+        'Provisionnement avec Ansible et Terraform d’un environnement UAT supplémentaire pour la documentation, les tests de nouveaux environnements et la mesure du temps de reprise (DR).',
+        'Orchestration de clusters Kubernetes pour les environnements de production et de staging, avec optimisation des ressources et de l’évolutivité.',
+        'Exploitation et intégration de RabbitMQ dans un environnement de microservices et contribution au diagnostic des échanges asynchrones.',
+      ],
+      metrics: [
+        { label: 'Python 3.8 → 3.12', value: '-40%', sub: 'incidents de production' },
+        { label: '8 min → 3 min', value: '-62,5%', sub: 'temps de création des images' },
+      ],
+    },
+    {
+      achievements: [
+        'Optimisation d’applications Python pour la mission spatiale PLATO de l’ESA, avec une réduction des temps d’exécution jusqu’à 40 % grâce au profiling et à l’optimisation algorithmique.',
+        'Conception de tests unitaires et d’intégration pour garantir la qualité et la stabilité des développements.',
+        'Développement et optimisation de pipelines de traitement de données et automatisation des workflows de test sous Linux.',
+        'Participation aux pipelines GitLab CI/CD et collaboration avec les équipes scientifiques pour résoudre les incidents et améliorer les développements en continu.',
+      ],
+      metrics: [{ label: 'Temps d’exécution', value: '-40%', sub: 'jusqu’à' }],
+    },
+    {
+      achievements: [
+        'Développement d’une plateforme web de gestion de données basée sur Django, incluant des API REST et des fonctionnalités backend.',
+        'Développement et intégration d’interfaces web connectées au backend Django.',
+        'Conteneurisation avec Docker et orchestration des services via Docker Compose.',
+        'Automatisation des déploiements et des tâches d’administration avec Ansible et Bash, avec mise en place de workflows reproductibles.',
+        'Administration et optimisation d’environnements Linux.',
+      ],
+      metrics: [],
+    },
+    {
+      achievements: [
+        'Développement et optimisation d’applications scientifiques Python et Fortran pour le traitement de données atmosphériques.',
+        'Réduction des temps d’exécution jusqu’à 45 % grâce au profiling, à l’optimisation algorithmique et à la vectorisation.',
+        'Mise en œuvre de traitements parallèles et de solutions HPC pour l’analyse de grands volumes de données.',
+        'Développement de pipelines automatisés de prétraitement, validation et analyse de données scientifiques.',
+        'Traitement de plus de 111 000 spectres et gestion de données scientifiques avec MongoDB.',
+        'Automatisation des traitements avec Python et Bash sous Linux, en utilisant NumPy, Pandas et SciPy.',
+      ],
+      metrics: [
+        { label: 'Temps d’exécution', value: '-45%', sub: 'jusqu’à' },
+        { label: 'Spectres traités', value: '111 000+', sub: 'données atmosphériques' },
+      ],
+    },
   ],
   en: [
-    { achievements: ['Migrated the Python platform from Python 3.8 to Python 3.12, reducing production incidents by approximately 40% and improving error readability.', 'Migrated CI/CD pipelines from Jenkins to GitHub Actions, improving their quality, reliability, maintainability and security.', 'Modernized a codebase developed over approximately five years through technical-debt management, refactoring and code-quality improvements.', 'Introduced uv for Python package and environment management, reducing image creation time from 8 to 3 minutes (-62.5%) and standardizing dependency management.', 'Adopted Ruff to automate linting and formatting, strengthening Python quality standards.', 'Improved secrets-management strategy and strengthened security practices in CI/CD workflows.', 'Managed and supervised production and staging environments, including production monitoring and service availability tracking.', 'Participated in on-call rotations and handled production incidents through analysis and resolution to ensure service continuity.', 'Provisioned an additional UAT environment with Ansible and Terraform for documentation, new-environment testing and disaster-recovery timing.', 'Orchestrated Kubernetes clusters for production and staging environments.', 'Operated and integrated RabbitMQ in a microservices environment and contributed to diagnosing asynchronous exchanges.'], metrics: [{ label: 'Python 3.8 → 3.12', value: '-40%', sub: 'production incidents' }, { label: '8 min → 3 min', value: '-62.5%', sub: 'image creation time' }] },
-    { achievements: ['Optimized Python code for the ESA PLATO mission, improving performance by 40%.', 'Implemented rigorous unit and integration tests, reducing bugs by 30%.', 'Integrated optimized code into the data-processing pipeline, accelerating analysis by 25%.'], metrics: [{ label: 'Performance', value: '+40%', sub: 'code optimization' }, { label: 'Bug rate', value: '-30%', sub: 'through rigorous testing' }, { label: 'Analysis speed', value: '+25%', sub: 'data pipeline' }] },
-    { achievements: ['Developed a Django database-management platform, improving data-processing efficiency by 35%.', 'Created a user interface integrated with the backend.', 'Containerized the project with Docker and Docker Compose.'], metrics: [{ label: 'Data processing', value: '+35%', sub: 'efficiency' }] },
-    { achievements: ['Optimized Python programs for complex atmospheric calculations, reducing computation time by 45%.', 'Managed and analyzed large atmospheric datasets with MongoDB and R.', 'Ran terrestrial-spectrum simulations across 111,766 spectra.'], metrics: [{ label: 'Computation time', value: '-45%', sub: 'atmospheric calculations' }, { label: 'Spectra simulated', value: '111,766', sub: 'terrestrial spectra' }] },
+    {
+      achievements: [
+        'Migrated the Python platform from Python 3.8 to Python 3.12, reducing production incidents by approximately 40% and improving error readability.',
+        'Migrated CI/CD pipelines from Jenkins to GitHub Actions, improving their quality, reliability, maintainability and security.',
+        'Modernized a codebase developed over approximately five years through technical-debt management, refactoring and code-quality improvements.',
+        'Introduced uv for Python package and environment management, reducing image creation time from 8 to 3 minutes (-62.5%) and standardizing dependency management.',
+        'Adopted Ruff to automate linting and formatting, strengthening Python quality standards.',
+        'Improved secrets-management strategy and strengthened security practices in CI/CD workflows.',
+        'Monitored production and staging environments in real time, tracking availability, performance and product health to ensure high availability.',
+        'Participated in on-call rotations and handled production incidents from detection and diagnosis through resolution and follow-up to ensure service continuity and product availability.',
+        'Provisioned an additional UAT environment with Ansible and Terraform for documentation, new-environment testing and disaster-recovery timing.',
+        'Orchestrated Kubernetes clusters for production and staging environments, optimizing resources and scalability.',
+        'Operated and integrated RabbitMQ in a microservices environment and contributed to diagnosing asynchronous exchanges.',
+      ],
+      metrics: [
+        { label: 'Python 3.8 → 3.12', value: '-40%', sub: 'production incidents' },
+        { label: '8 min → 3 min', value: '-62.5%', sub: 'image creation time' },
+      ],
+    },
+    {
+      achievements: [
+        'Optimized Python applications for ESA’s PLATO space mission, reducing execution times by up to 40% through profiling and algorithmic optimization.',
+        'Designed unit and integration tests to ensure development quality and stability.',
+        'Developed and optimized data-processing pipelines and automated test workflows on Linux.',
+        'Contributed to GitLab CI/CD pipelines and collaborated with scientific teams to resolve incidents and continuously improve development.',
+      ],
+      metrics: [{ label: 'Execution time', value: '-40%', sub: 'up to' }],
+    },
+    {
+      achievements: [
+        'Developed a Django-based web data-management platform, including REST APIs and backend features.',
+        'Developed and integrated web interfaces connected to the Django backend.',
+        'Containerized applications with Docker and orchestrated services with Docker Compose.',
+        'Automated deployments and administration tasks with Ansible and Bash, creating reproducible workflows.',
+        'Administered and optimized Linux environments.',
+      ],
+      metrics: [],
+    },
+    {
+      achievements: [
+        'Developed and optimized scientific Python and Fortran applications for atmospheric data processing.',
+        'Reduced execution times by up to 45% through profiling, algorithmic optimization and vectorization.',
+        'Implemented parallel processing and HPC solutions to analyze large data volumes.',
+        'Developed automated pipelines for scientific data preprocessing, validation and analysis.',
+        'Processed more than 111,000 spectra and managed scientific data with MongoDB.',
+        'Automated processing with Python and Bash on Linux using NumPy, Pandas and SciPy.',
+      ],
+      metrics: [
+        { label: 'Execution time', value: '-45%', sub: 'up to' },
+        { label: 'Spectra processed', value: '111,000+', sub: 'atmospheric data' },
+      ],
+    },
   ],
 } as const;
 
