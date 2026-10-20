@@ -19,15 +19,22 @@ jobs:
           path: source-repo
 
       - name: Create and checkout pages repository
+        env:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
         run: |
+          if [ -z "$DEPLOY_TOKEN" ]; then
+            echo "DEPLOY_TOKEN is not configured"
+            exit 1
+          fi
+
           # Clone the pages repository (this might fail if repo is empty, that's ok)
-          git clone https://${{ secrets.DEPLOY_TOKEN }}@github.com/shahinabdi/shahinabdi.github.io.git pages-repo || mkdir pages-repo
+          git clone "https://x-access-token:${DEPLOY_TOKEN}@github.com/shahinabdi/shahinabdi.github.io.git" pages-repo || mkdir pages-repo
           cd pages-repo
           
           # Initialize if it's empty
           if [ ! -d .git ]; then
             git init
-            git remote add origin https://${{ secrets.DEPLOY_TOKEN }}@github.com/shahinabdi/shahinabdi.github.io.git
+            git remote add origin "https://x-access-token:${DEPLOY_TOKEN}@github.com/shahinabdi/shahinabdi.github.io.git"
           fi
           
           # Create and checkout main branch
@@ -60,12 +67,14 @@ jobs:
 
       - name: Deploy to GitHub Pages
         working-directory: pages-repo
+        env:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
         run: |
           git config user.name "GitHub Actions"
           git config user.email "github-actions@github.com"
           git add .
           git commit -m "Deploy React application" || echo "No changes to commit"
-          git remote set-url origin https://${{ secrets.DEPLOY_TOKEN }}@github.com/shahinabdi/shahinabdi.github.io.git
+          git remote set-url origin "https://x-access-token:${DEPLOY_TOKEN}@github.com/shahinabdi/shahinabdi.github.io.git"
 
           # Retry push in case of a concurrent update to the remote main ref
           for i in 1 2 3 4 5; do
